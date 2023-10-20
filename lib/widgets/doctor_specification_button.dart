@@ -30,13 +30,6 @@ class DoctorSpecificationButton extends StatelessWidget {
           text2!, // Replace with your desired text
           style: TextStyle(fontSize: 10, color: Colors.grey),
         ),
-        Align(
-          alignment: Alignment.bottomRight,
-          child: Text(
-            'View All',
-            style: TextStyle(color: Colors.blue),
-          ),
-        ),
       ],
     );
   }

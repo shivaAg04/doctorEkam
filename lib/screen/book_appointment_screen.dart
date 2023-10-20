@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:internship/model/doctor_details_model.dart';
+import 'package:internship/screen/select_package.dart';
 import 'package:internship/widgets/doctor_specification_button.dart';
 
 class CurvedBlueTick extends CustomPainter {
@@ -168,18 +169,25 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                 ),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             MaterialButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0)),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SelectPackageScreen(),
+                  ),
+                );
+              },
+              color: Colors.blue,
+              minWidth: width * .9,
+              height: height * .07,
               child: const Text(
                 'Make Appointment',
                 style: TextStyle(color: Colors.white),
               ),
-              color: Colors.blue,
-              minWidth: width * .9,
-              height: height * .07,
             )
           ],
         ),
