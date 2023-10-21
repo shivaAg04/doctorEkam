@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:internship/model/confirmation_model.dart';
 import 'package:internship/model/doctor_details_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:internship/model/my_booking_model.dart';
 
 class Api {
   static List<DoctorDetailsModel> doctorList = [];
@@ -11,7 +12,7 @@ class Api {
   static List<String> package = [];
 
   static ConfirmationModel cm = ConfirmationModel(); //confirmation model
-
+  static Map<String, String> doctorimage = {};
   //fetching doctor details from api
   static Future<List<DoctorDetailsModel>> getDoctorDetails() async {
     final resposne = await http.get(Uri.parse(
@@ -21,6 +22,7 @@ class Api {
       doctorList.clear();
       for (Map i in data) {
         i as Map<String, dynamic>;
+        doctorimage[i['doctor_name']] = i['image'];
         doctorList.add(DoctorDetailsModel.fromJson(i));
       }
       return doctorList;
@@ -61,9 +63,25 @@ class Api {
     if (resposne.statusCode == 200) {
       cm = ConfirmationModel.fromJson(data);
       return cm;
-      print("Confirmation: ${cm.doctorName}");
-      print(cm.doctorName);
+    } else {
+      return cm;
     }
-    return cm;
+  }
+
+  //fetch my booking details
+  static Future<List<MyBookingModel>> getMyBooking() async {
+    final resposne = await http.get(Uri.parse(
+        'https://my-json-server.typicode.com/githubforekam/doctor-appointment/appointments'));
+    var data = jsonDecode(resposne.body.toString());
+    List<MyBookingModel> myBookingList = [];
+    if (resposne.statusCode == 200) {
+      for (Map i in data) {
+        i as Map<String, dynamic>;
+        myBookingList.add(MyBookingModel.fromJson(i));
+      }
+      return myBookingList;
+    } else {
+      return myBookingList;
+    }
   }
 }

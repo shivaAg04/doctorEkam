@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:internship/screen/confirmation_screen.dart';
+import 'package:internship/screen/my_bookings_screen.dart';
 import 'package:internship/widgets/radio_button.dart';
 import 'package:internship/widgets/select_duration.dart';
 
@@ -45,7 +47,14 @@ class _SelectPackageScreenState extends State<SelectPackageScreen> {
                       borderRadius: BorderRadius.circular(10)),
                   1),
               color: Colors.blue,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ConfirmationScreen(),
+                  ),
+                );
+              },
               child: const Text(
                 'Next',
                 style: TextStyle(color: Colors.white),

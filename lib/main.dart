@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:internship/screen/confirmation_screen.dart';
 import 'package:internship/screen/home_screen.dart';
+import 'package:internship/screen/my_bookings_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,12 +16,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // Remove debug banner
       title: 'Doctor Appointment App',
-      theme: ThemeData(
-        primaryColor: Colors.blue,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-      ),
-      home: ConfirmationScreen(),
+      theme: ThemeData(primaryColor: Colors.blue, useMaterial3: true),
+      home: HomeScreen(),
     );
   }
 }

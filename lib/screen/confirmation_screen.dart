@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:internship/api/api.dart';
 import 'package:internship/model/confirmation_model.dart';
+import 'package:internship/screen/my_bookings_screen.dart';
 
 class ConfirmationScreen extends StatefulWidget {
   const ConfirmationScreen({Key? key}) : super(key: key);
@@ -73,7 +74,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                           ),
                           const SizedBox(width: 10),
                           Text(snapshot.data!.appointmentPackage.toString()),
-                          SizedBox(
+                          const SizedBox(
                             width: 50,
                           ),
                           const Icon(
@@ -83,7 +84,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                           const SizedBox(width: 10),
                           Text(snapshot.data!.location.toString()),
                         ]),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Row(children: [
                           const Icon(
                             Icons.calendar_today,
@@ -91,7 +92,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                           ),
                           const SizedBox(width: 10),
                           Text(snapshot.data!.appointmentDate.toString()),
-                          SizedBox(
+                          const SizedBox(
                             width: 50,
                           ),
                           const Icon(
@@ -104,23 +105,23 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                       ],
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   const Spacer(),
                   MaterialButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0)),
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => SelectPackageScreen(),
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MyBookingsScreen(),
+                        ),
+                      );
                     },
                     color: Colors.blue,
                     minWidth: _width * .9,
                     child: const Text(
-                      'View Appointment',
+                      'View Appointments',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
