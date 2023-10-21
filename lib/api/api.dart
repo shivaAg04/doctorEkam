@@ -1,14 +1,16 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:internship/model/confirmation_model.dart';
 import 'package:internship/model/doctor_details_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:internship/model/select_package_model.dart';
 
 class Api {
   static List<DoctorDetailsModel> doctorList = [];
   static List<String> duration = [];
   static List<String> package = [];
+
+  static ConfirmationModel cm = ConfirmationModel(); //confirmation model
 
   //fetching doctor details from api
   static Future<List<DoctorDetailsModel>> getDoctorDetails() async {
@@ -47,5 +49,21 @@ class Api {
       print("Duration: ${duration.length}");
       print(duration[0]);
     }
+  }
+
+  // confirmation fetch detail
+
+  static Future<ConfirmationModel> getConfirmationDetail() async {
+    final resposne = await http.get(Uri.parse(
+        'https://my-json-server.typicode.com/githubforekam/doctor-appointment/booking_confirmation'));
+    var data = jsonDecode(resposne.body.toString());
+
+    if (resposne.statusCode == 200) {
+      cm = ConfirmationModel.fromJson(data);
+      return cm;
+      print("Confirmation: ${cm.doctorName}");
+      print(cm.doctorName);
+    }
+    return cm;
   }
 }

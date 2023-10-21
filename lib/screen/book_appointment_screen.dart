@@ -188,7 +188,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                 'Make Appointment',
                 style: TextStyle(color: Colors.white),
               ),
-            )
+            ),
           ],
         ),
       ),
