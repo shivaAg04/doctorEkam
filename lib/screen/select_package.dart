@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:internship/widgets/radio_button.dart';
 import 'package:internship/widgets/select_duration.dart';
 
 class SelectPackageScreen extends StatefulWidget {
@@ -23,7 +24,33 @@ class _SelectPackageScreenState extends State<SelectPackageScreen> {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
+            const SizedBox(height: 20),
             SelectDuration(),
+            const SizedBox(height: 20),
+            const Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                'Select Package',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Expanded(child: RadioButtonGroup()),
+            MaterialButton(
+              minWidth: double.infinity,
+              //convert it circular button
+              shape: ShapeBorder.lerp(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  1),
+              color: Colors.blue,
+              onPressed: () {},
+              child: const Text(
+                'Next',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
           ]),
         ));
   }

@@ -11,7 +11,7 @@ class _SelectDurationState extends State<SelectDuration> {
 
   @override
   Widget build(BuildContext context) {
-    print(Api.duration.length);
+   
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.blue),
