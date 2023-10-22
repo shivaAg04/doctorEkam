@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:internship/api/api.dart';
+import 'package:internship/model/reviewdataModel.dart';
 
 class SelectDuration extends StatefulWidget {
   @override
@@ -11,7 +12,6 @@ class _SelectDurationState extends State<SelectDuration> {
 
   @override
   Widget build(BuildContext context) {
-   
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.blue),
@@ -27,7 +27,7 @@ class _SelectDurationState extends State<SelectDuration> {
               value: item,
               child: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.watch_later,
                     color: Colors.blue,
                   ),
@@ -39,6 +39,7 @@ class _SelectDurationState extends State<SelectDuration> {
           onChanged: (String? newValue) {
             setState(() {
               selectedItem = newValue!;
+              ReviewDataModel.rm.duration = selectedItem;
             });
           },
         ),

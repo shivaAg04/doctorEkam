@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:internship/api/api.dart';
+import 'package:internship/model/reviewdataModel.dart';
 
 class RadioButtonGroup extends StatefulWidget {
   @override
@@ -31,6 +32,7 @@ class _RadioButtonGroupState extends State<RadioButtonGroup> {
               padding: const EdgeInsets.all(8.0),
               child: ListTile(
                 leading: CircleAvatar(
+                  backgroundColor: Colors.blue[100],
                   radius: 30,
                   child: Icon(
                     icon[index],
@@ -47,6 +49,8 @@ class _RadioButtonGroupState extends State<RadioButtonGroup> {
                   groupValue: selectedValue,
                   onChanged: (value) {
                     setState(() {
+                      ReviewDataModel.rm.package = Api.package[index];
+
                       selectedValue = value;
                     });
                   },

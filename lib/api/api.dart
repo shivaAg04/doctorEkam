@@ -10,6 +10,7 @@ class Api {
   static List<DoctorDetailsModel> doctorList = [];
   static List<String> duration = [];
   static List<String> package = [];
+  static List<Map<String, List<String>>> availability = [];
 
   static ConfirmationModel cm = ConfirmationModel(); //confirmation model
   static Map<String, String> doctorimage = {};
@@ -20,11 +21,14 @@ class Api {
     var data = jsonDecode(resposne.body.toString());
     if (resposne.statusCode == 200) {
       doctorList.clear();
+      availability.clear();
       for (Map i in data) {
         i as Map<String, dynamic>;
+
         doctorimage[i['doctor_name']] = i['image'];
         doctorList.add(DoctorDetailsModel.fromJson(i));
       }
+
       return doctorList;
     } else {
       return doctorList;
@@ -36,9 +40,7 @@ class Api {
     final resposne = await http.get(Uri.parse(
         'https://my-json-server.typicode.com/githubforekam/doctor-appointment/appointment_options'));
     var data = jsonDecode(resposne.body.toString());
-    print(data);
-    print(duration.length);
-    print(resposne.statusCode);
+
     if (resposne.statusCode == 200) {
       duration.clear();
       package.clear();
@@ -48,8 +50,6 @@ class Api {
       data['package'].forEach((v) {
         package.add(v);
       });
-      print("Duration: ${duration.length}");
-      print(duration[0]);
     }
   }
 

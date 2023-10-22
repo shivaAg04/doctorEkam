@@ -12,6 +12,7 @@ class DoctorSpecificationButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         CircleAvatar(
+          backgroundColor: Colors.blue.shade50,
           radius: 30,
           child: Icon(
             icon,

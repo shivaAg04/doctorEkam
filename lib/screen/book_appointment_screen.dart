@@ -1,28 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:internship/model/doctor_details_model.dart';
+import 'package:internship/model/reviewdataModel.dart';
 import 'package:internship/screen/select_package.dart';
+import 'package:internship/util/dateformat.dart';
+
 import 'package:internship/widgets/doctor_specification_button.dart';
-
-class CurvedBlueTick extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..color = Colors.blue
-      ..style = PaintingStyle.fill;
-
-    Path path = Path()
-      ..moveTo(0, size.height / 2)
-      ..lineTo(size.width / 3, size.height)
-      ..lineTo(size.width, 0);
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
-  }
-}
+import 'package:internship/widgets/time_card.dart';
 
 class BookAppointmentScreen extends StatefulWidget {
   DoctorDetailsModel? d;
@@ -33,8 +16,17 @@ class BookAppointmentScreen extends StatefulWidget {
 }
 
 class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
+  static int curindex = 0;
+  static int timeindex = 0;
+
+  String key = "";
+
   @override
   Widget build(BuildContext context) {
+    ReviewDataModel.rm.doctor_image = widget.d!.image.toString();
+    List<String> keysList = widget.d!.availability!.avail.keys.toList();
+    key = keysList[curindex];
+
     double height = MediaQuery.of(context).size.height * 1;
     double width = MediaQuery.of(context).size.width * 1;
     return Scaffold(
@@ -155,6 +147,31 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                 ),
               ),
             ),
+            SizedBox(
+                height: height * .07,
+                width: double.infinity,
+                child: ListView.builder(
+                    padding: EdgeInsets.all(10),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: widget.d!.availability!.avail.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          key = keysList[index];
+                          curindex = index;
+                          timeindex = 0;
+                          print(index);
+                          setState(() {});
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: TimeCard(
+                              time: Util.Datformat(keysList[index].toString()),
+                              is_selected: curindex == index ? true : false),
+                        ),
+                      );
+                    })),
+
             //Time
             const Padding(
               padding: EdgeInsets.fromLTRB(10, 20, 0, 20),
@@ -169,15 +186,45 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                 ),
               ),
             ),
+            SizedBox(
+                height: height * .07,
+                width: double.infinity,
+                child: ListView.builder(
+                    padding: EdgeInsets.all(10),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: widget.d!.availability!.avail[key]!.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return InkWell(
+                        onTap: () {
+                          setState(() {
+                            timeindex = index;
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: TimeCard(
+                              time: widget.d!.availability!.avail[key]![index]
+                                  .toString()
+                                  .substring(0, 8),
+                              is_selected: timeindex == index ? true : false),
+                        ),
+                      );
+                    })),
+
             const Spacer(),
             MaterialButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0)),
               onPressed: () {
+                ReviewDataModel.rm.date = key;
+                ReviewDataModel.rm.time = widget
+                    .d!.availability!.avail[key]![timeindex]
+                    .toString()
+                    .substring(0, 8);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SelectPackageScreen(),
+                    builder: (context) => SelectPackageScreen(d: widget.d!),
                   ),
                 );
               },

@@ -16,7 +16,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // Remove debug banner
       title: 'Doctor Appointment App',
-      theme: ThemeData(primaryColor: Colors.blue, useMaterial3: true),
+      theme: ThemeData(
+          appBarTheme: const AppBarTheme(
+            elevation: 0,
+            centerTitle: true,
+            iconTheme: IconThemeData(color: Colors.blue),
+            titleTextStyle: TextStyle(
+                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+
+            color: Colors.white, // Background color of the app bar
+            // Elevation/shadow of the app bar
+          ),
+          primaryColor: Colors.blue,
+          primarySwatch: Colors.blue),
       home: HomeScreen(),
     );
   }

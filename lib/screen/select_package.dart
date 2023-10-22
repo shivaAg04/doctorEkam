@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:internship/model/doctor_details_model.dart';
+import 'package:internship/model/reviewdataModel.dart';
 import 'package:internship/screen/confirmation_screen.dart';
-import 'package:internship/screen/my_bookings_screen.dart';
+import 'package:internship/screen/review_summary_screen.dart';
+import 'package:internship/util/dateformat.dart';
+
 import 'package:internship/widgets/radio_button.dart';
 import 'package:internship/widgets/select_duration.dart';
 
 class SelectPackageScreen extends StatefulWidget {
-  const SelectPackageScreen({super.key});
+  DoctorDetailsModel? d;
+  SelectPackageScreen({super.key, required this.d});
 
   @override
   State<SelectPackageScreen> createState() => _SelectPackageScreenState();
@@ -14,6 +19,10 @@ class SelectPackageScreen extends StatefulWidget {
 class _SelectPackageScreenState extends State<SelectPackageScreen> {
   @override
   Widget build(BuildContext context) {
+    ReviewDataModel.rm.doctor_name = widget.d!.doctorName.toString();
+    ReviewDataModel.rm.speciality = widget.d!.speciality.toString();
+    ReviewDataModel.rm.location = widget.d!.location.toString();
+
     return Scaffold(
         appBar: AppBar(centerTitle: true, title: Text('Select Package')),
         body: Padding(
@@ -38,20 +47,21 @@ class _SelectPackageScreenState extends State<SelectPackageScreen> {
             ),
             Expanded(child: RadioButtonGroup()),
             MaterialButton(
+              height: 50,
               minWidth: double.infinity,
               //convert it circular button
               shape: ShapeBorder.lerp(
                   RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
+                      borderRadius: BorderRadius.circular(20)),
                   RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
+                      borderRadius: BorderRadius.circular(20)),
                   1),
               color: Colors.blue,
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ConfirmationScreen(),
+                    builder: (context) => ReviewSummaryScreen(),
                   ),
                 );
               },

@@ -1,7 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+
 import 'package:internship/api/api.dart';
 import 'package:internship/model/confirmation_model.dart';
 import 'package:internship/screen/my_bookings_screen.dart';
@@ -21,7 +19,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Confirmation "),
+        title: const Text("Confirmation "),
       ),
       body: FutureBuilder<ConfirmationModel>(
         future: Api.getConfirmationDetail(),
@@ -108,6 +106,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                   const Spacer(),
                   const Spacer(),
                   MaterialButton(
+                    height: 50,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0)),
                     onPressed: () {
