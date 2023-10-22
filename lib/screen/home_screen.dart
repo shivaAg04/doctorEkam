@@ -25,7 +25,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: const Text('Ekam Doctors'),
+        title: const Text(
+          'Ekam Doctors',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: FutureBuilder<List<DoctorDetailsModel>>(
           future: Api.getDoctorDetails(),

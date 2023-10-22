@@ -1,45 +1,39 @@
-// import 'dart:async';
+import 'dart:async';
 
-// import 'package:flutter/material.dart';
-// import 'package:internship/screen/home_screen.dart';
- 
+import 'package:flutter/material.dart';
+import 'package:internship/screen/home_screen.dart';
 
-// class SplashScreen extends StatefulWidget {
-//   const SplashScreen({super.key});
+import 'package:lottie/lottie.dart';
 
-//   @override
-//   State<SplashScreen> createState() => _SplashScreenState();
-// }
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
-// class _SplashScreenState extends State<SplashScreen> {
-//   @override
-//   void initState() {
-//     // TODO: implement initState
-//     super.initState();
-    
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
 
-//     Timer(const Duration(seconds: 5), () {
-//       Navigator.push(
-//         context,
-//         MaterialPageRoute(
-//           builder: (context) => HomeScreen(),
-//         ),
-//       );
-//     });
-//   }
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
 
-//   @override
-//   Widget build(BuildContext context) {
-//     double height = MediaQuery.of(context).size.height * 1;
+    Timer(const Duration(seconds: 4), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomeScreen(),
+        ),
+      );
+    });
+  }
 
-//     return Scaffold(
-//       backgroundColor: Colors.black,
-//       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-//         SizedBox(
-//             height: height * .3,
-//             child: 
-        
-//       ]),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Lottie.asset("assets/lottie/splash.json"),
+      ]),
+    );
+  }
+}

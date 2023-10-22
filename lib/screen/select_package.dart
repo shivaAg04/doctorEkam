@@ -58,12 +58,14 @@ class _SelectPackageScreenState extends State<SelectPackageScreen> {
                   1),
               color: Colors.blue,
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ReviewSummaryScreen(),
-                  ),
-                );
+                if (ReviewDataModel.rm.package != '') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ReviewSummaryScreen(),
+                    ),
+                  );
+                }
               },
               child: const Text(
                 'Next',
